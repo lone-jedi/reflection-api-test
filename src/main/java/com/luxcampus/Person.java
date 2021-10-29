@@ -16,4 +16,12 @@ public class Person {
     public int getAge() {
         return age;
     }
+
+    public void sayHi() {
+        System.out.println("Hi, i am " + name);
+    }
+
+    private void sayAge() {
+        System.out.println("I am " + age + " years old!");
+    }
 }
