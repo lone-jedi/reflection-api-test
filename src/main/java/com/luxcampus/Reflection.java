@@ -3,6 +3,7 @@ package com.luxcampus;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 public class Reflection {
     public static Object createInstance(Class clazz) throws NoSuchMethodException,
@@ -37,4 +38,11 @@ public class Reflection {
         }
     }
 
+    public static void printParentsAndInterfaces(Class clazz) {
+        Class[] interfaces = clazz.getInterfaces();
+        Class superClass = clazz.getSuperclass();
+
+        System.out.println(superClass);
+        Arrays.toString(interfaces);
+    }
 }
