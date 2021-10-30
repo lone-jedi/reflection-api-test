@@ -1,6 +1,6 @@
 package com.luxcampus;
 
-public class Person {
+public class Person implements Walkable{
     private String name;
     private int age;
 
@@ -26,7 +26,15 @@ public class Person {
         System.out.println("Hi, i am " + name);
     }
 
+    public void walk() {
+        System.out.println("* person " +  name + " is walking *");
+    }
+
     private void sayAge() {
         System.out.println("I am " + age + " years old!");
+    }
+
+    private final void sayHiTo(String name) {
+        System.out.println("Hi, " + name + "!");
     }
 }
