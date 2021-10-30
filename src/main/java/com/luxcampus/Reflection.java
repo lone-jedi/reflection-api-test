@@ -1,9 +1,9 @@
 package com.luxcampus;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 
 public class Reflection {
     public static Object createInstance(Class clazz) throws NoSuchMethodException,
@@ -43,6 +43,38 @@ public class Reflection {
         Class superClass = clazz.getSuperclass();
 
         System.out.println(superClass);
-        Arrays.toString(interfaces);
+
+        for (Class anInterface : interfaces) {
+            System.out.println(anInterface);
+        }
+    }
+
+    public static void clearPrivateFieldsData(Object value) throws IllegalAccessException {
+        for (Field field : value.getClass().getDeclaredFields()) {
+            if(Modifier.isPrivate(field.getModifiers())) {
+                field.setAccessible(true);
+                if(field.getType().getSuperclass() == Object.class) {
+                    field.set(value, null);
+                } else if(field.getType() == int.class) {
+                    field.setInt(value, 0);
+                } else if(field.getType() == double.class) {
+                    field.setDouble(value, 0.0);
+                } else if(field.getType() == boolean.class) {
+                    field.setBoolean(value,false);
+                } else if(field.getType() == float.class) {
+                    field.setFloat(value,0.0f);
+                } else if(field.getType() == short.class) {
+                    field.setShort(value, (short) 0);
+                } else if(field.getType() == byte.class) {
+                    field.setByte(value, (byte) 0);
+                } else if(field.getType() == long.class) {
+                    field.setLong(value, 0L);
+                } else if(field.getType() == char.class) {
+                    field.setChar(value, '\u0000');
+                } else {
+                    throw new IllegalStateException("Unsupportable type: " + field.getType());
+                }
+            }
+        }
     }
 }
