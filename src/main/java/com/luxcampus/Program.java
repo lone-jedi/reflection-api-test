@@ -11,7 +11,7 @@ public class Program {
             System.out.println("Print private methods:");
             Reflection.printPrivateMethods(Person.class);
             System.out.println("Create instance of Person and call sayHi()");
-            ((Person)(Reflection.createInstance(Person.class))).sayHi();
+            ((Person)(Reflection.createInstance(Person.class, "Tom", 18))).sayHi();
             System.out.println("Print all final methods");
             Reflection.printFinalMethods(person);
             System.out.println("Clear private methods values");
