@@ -45,4 +45,30 @@ public class Person implements Walkable {
                 ", age=" + age +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object value) {
+        if(this == value) {
+            return true;
+        }
+
+        if(value == null) {
+            return false;
+        }
+
+        if(getClass() != value.getClass()) {
+            return false;
+        }
+
+        if(!(value instanceof Person)) {
+            return false;
+        }
+
+        Person person = (Person) value;
+
+        return name.equals(person.getName()) && age == person.getAge();
+    }
+
 }
+
+
