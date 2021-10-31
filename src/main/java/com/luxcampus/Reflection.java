@@ -6,10 +6,14 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 public class Reflection {
-    public static Object createInstance(Class clazz) throws NoSuchMethodException,
+    public static Object createInstance(Class clazz, Object... constructorArguments) throws NoSuchMethodException,
             InvocationTargetException, InstantiationException, IllegalAccessException {
-        Object result = clazz.getConstructor().newInstance();
-        return result;
+        Class[] classes = new Class[constructorArguments.length];
+        for (int i = 0; i < constructorArguments.length; i++) {
+            classes[i] = constructorArguments[i].getClass();
+        }
+
+        return clazz.getConstructor(classes).newInstance(constructorArguments);
     }
 
     public static void callNoArgumentsMethods(Object value)
@@ -53,9 +57,8 @@ public class Reflection {
         for (Field field : value.getClass().getDeclaredFields()) {
             if(Modifier.isPrivate(field.getModifiers())) {
                 field.setAccessible(true);
-                if(field.getType().getSuperclass() == Object.class) {
-                    field.set(value, null);
-                } else if(field.getType() == int.class) {
+
+                if(field.getType() == int.class) {
                     field.setInt(value, 0);
                 } else if(field.getType() == double.class) {
                     field.setDouble(value, 0.0);
@@ -72,7 +75,7 @@ public class Reflection {
                 } else if(field.getType() == char.class) {
                     field.setChar(value, '\u0000');
                 } else {
-                    throw new IllegalStateException("Unsupportable type: " + field.getType());
+                    field.set(value, null);
                 }
             }
         }
