@@ -8,6 +8,10 @@ import java.lang.reflect.Modifier;
 public class Reflection {
     public static Object createInstance(Class clazz, Object... constructorArguments) throws NoSuchMethodException,
             InvocationTargetException, InstantiationException, IllegalAccessException {
+        if(clazz == null) {
+            throw new NullPointerException("First argument is null. Null is not supported");
+        }
+
         Class[] classes = new Class[constructorArguments.length];
         for (int i = 0; i < constructorArguments.length; i++) {
             classes[i] = constructorArguments[i].getClass();
@@ -54,6 +58,10 @@ public class Reflection {
     }
 
     public static void clearPrivateFieldsData(Object value) throws IllegalAccessException {
+        if(value == null) {
+            throw new NullPointerException("Null is not supported");
+        }
+
         for (Field field : value.getClass().getDeclaredFields()) {
             if(Modifier.isPrivate(field.getModifiers())) {
                 field.setAccessible(true);
