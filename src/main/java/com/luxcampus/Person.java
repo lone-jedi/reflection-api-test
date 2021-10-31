@@ -9,7 +9,7 @@ public class Person implements Walkable {
         age = 43;
     }
 
-    public Person(String name, int age) {
+    public Person(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
