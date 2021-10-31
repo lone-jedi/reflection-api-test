@@ -9,7 +9,7 @@ public class Program {
             System.out.println("Print patent class and interfaces:");
             Reflection.printParentsAndInterfaces(Person.class);
             System.out.println("Print private methods:");
-            Reflection.printPrivateMethods(Person.class);
+            Reflection.printNonPublicMethods(Person.class);
             System.out.println("Create instance of Person and call sayHi()");
             ((Person)(Reflection.createInstance(Person.class, "Tom", 18))).sayHi();
             System.out.println("Print all final methods");

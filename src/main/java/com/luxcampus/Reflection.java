@@ -34,7 +34,7 @@ public class Reflection {
         }
     }
 
-    public static void printPrivateMethods(Class clazz) {
+    public static void printNonPublicMethods(Class clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
             if(!Modifier.isPublic(method.getModifiers())) {
                 System.out.println(method);
